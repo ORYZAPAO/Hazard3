@@ -1,0 +1,33 @@
+[*]
+[*] GTKWave Analyzer v3.3.120 (w)1999-2024 BSI
+[*] Tue Sep 24 14:27:47 2024
+[*]
+[dumpfile] "/home/zosan/github/Hazard3/sim/dump.vcd"
+[dumpfile_mtime] "Tue Sep 24 14:25:04 2024"
+[dumpfile_size] 101171
+[savefile] "/home/zosan/github/Hazard3/sim/TEST.gtkw"
+[timestart] 0
+[size] 1336 1095
+[pos] -1 -1
+*-7.281452 287 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.u_hazard3_cpu_1port.
+[treeopen] top.u_hazard3_cpu_1port.core.
+[sst_width] 291
+[signals_width] 332
+[sst_expanded] 1
+[sst_vpaned_height] 329
+@420
+top.u_hazard3_cpu_1port.W_DATA
+top.u_hazard3_cpu_1port.W_ADDR
+@22
+top.u_hazard3_cpu_1port.haddr[31:0]
+@28
+top.u_hazard3_cpu_1port.clk
+top.u_hazard3_cpu_1port.clk_always_on
+top.u_hazard3_cpu_1port.rst_n
+top.u_hazard3_cpu_1port.clk_en
+@22
+top.u_hazard3_cpu_1port.core.frontend.fetch_addr[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
