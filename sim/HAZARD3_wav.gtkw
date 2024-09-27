@@ -1,0 +1,64 @@
+[*]
+[*] GTKWave Analyzer v3.3.120 (w)1999-2024 BSI
+[*] Fri Sep 27 12:12:35 2024
+[*]
+[dumpfile] "/home/zosan/github/Hazard3/sim/dump.vcd"
+[dumpfile_mtime] "Fri Sep 27 12:00:45 2024"
+[dumpfile_size] 125488
+[savefile] "/home/zosan/github/Hazard3/sim/HAZARD3_wav.gtkw"
+[timestart] 0
+[size] 1610 976
+[pos] 1500 627
+*-8.044016 337 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.u_hazard3_cpu_1port.
+[treeopen] top.u_hazard3_cpu_1port.core.
+[sst_width] 291
+[signals_width] 332
+[sst_expanded] 1
+[sst_vpaned_height] 447
+@420
+top.u_hazard3_cpu_1port.W_DATA
+top.u_hazard3_cpu_1port.W_ADDR
+@28
+top.u_hazard3_cpu_1port.clk
+top.u_hazard3_cpu_1port.clk_always_on
+top.u_hazard3_cpu_1port.rst_n
+@29
+top.u_hazard3_cpu_1port.clk_en
+@200
+-
+@22
+top.u_hazard3_cpu_1port.core.frontend.fetch_addr[31:0]
+@28
+top.u_hazard3_cpu_1port.clk
+top.u_hazard3_cpu_1port.clk_always_on
+top.u_hazard3_cpu_1port.clk_en
+top.u_hazard3_cpu_1port.pwrup_ack
+top.u_hazard3_cpu_1port.pwrup_req
+@200
+-
+-AHB
+@22
+top.u_hazard3_cpu_1port.haddr[31:0]
+@28
+top.u_hazard3_cpu_1port.hwrite
+top.u_hazard3_cpu_1port.htrans[1:0]
+top.u_hazard3_cpu_1port.hsize[2:0]
+top.u_hazard3_cpu_1port.hburst[2:0]
+@22
+top.u_hazard3_cpu_1port.hprot[3:0]
+@28
+top.u_hazard3_cpu_1port.hmastlock
+@22
+top.u_hazard3_cpu_1port.hmaster[7:0]
+@28
+top.u_hazard3_cpu_1port.hexcl
+top.u_hazard3_cpu_1port.hready
+top.u_hazard3_cpu_1port.hresp
+top.u_hazard3_cpu_1port.hexokay
+@22
+top.u_hazard3_cpu_1port.hwdata[31:0]
+top.u_hazard3_cpu_1port.hrdata[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
