@@ -16,13 +16,61 @@ module top  #(
      repeat(5) @(posedge clk) rst <= 1'b1;
      
 
-    repeat(100) @(posedge clk);
+    repeat(1000) @(posedge clk);
+     $display("END");
+     
     $finish;
    end
 
 
- hazard3_cpu_1port u_hazard3_cpu_1port 
-   (
+ hazard3_cpu_1port 
+   #(
+	// These must have the values given here for you to end up with a useful SoC:
+	.RESET_VECTOR    (32'h0000_0040),
+	.MTVEC_INIT      (32'h0000_0000),
+	.CSR_M_MANDATORY (1),
+	.CSR_M_TRAP      (1),
+	.DEBUG_SUPPORT   (1),
+	.NUM_IRQS        (1),
+	.RESET_REGFILE   (0),
+	// Can be overridden from the defaults in hazard3_config.vh during
+	// instantiation of example_soc():
+	.EXTENSION_A         (EXTENSION_A),
+	.EXTENSION_C         (EXTENSION_C),
+	.EXTENSION_M         (EXTENSION_M),
+	.EXTENSION_ZBA       (EXTENSION_ZBA),
+	.EXTENSION_ZBB       (EXTENSION_ZBB),
+	.EXTENSION_ZBC       (EXTENSION_ZBC),
+	.EXTENSION_ZBS       (EXTENSION_ZBS),
+	.EXTENSION_ZBKB      (EXTENSION_ZBKB),
+	.EXTENSION_ZIFENCEI  (EXTENSION_ZIFENCEI),
+	.EXTENSION_XH3BEXTM  (EXTENSION_XH3BEXTM),
+	.EXTENSION_XH3IRQ    (EXTENSION_XH3IRQ),
+	.EXTENSION_XH3PMPM   (EXTENSION_XH3PMPM),
+	.EXTENSION_XH3POWER  (EXTENSION_XH3POWER),
+	.CSR_COUNTER         (CSR_COUNTER),
+	.U_MODE              (U_MODE),
+	.PMP_REGIONS         (PMP_REGIONS),
+	.PMP_GRAIN           (PMP_GRAIN),
+	.PMP_HARDWIRED       (PMP_HARDWIRED),
+	.PMP_HARDWIRED_ADDR  (PMP_HARDWIRED_ADDR),
+	.PMP_HARDWIRED_CFG   (PMP_HARDWIRED_CFG),
+	.MVENDORID_VAL       (MVENDORID_VAL),
+	.BREAKPOINT_TRIGGERS (BREAKPOINT_TRIGGERS),
+	.IRQ_PRIORITY_BITS   (IRQ_PRIORITY_BITS),
+	.MIMPID_VAL          (MIMPID_VAL),
+	.MHARTID_VAL         (MHARTID_VAL),
+	.REDUCED_BYPASS      (REDUCED_BYPASS),
+	.MULDIV_UNROLL       (MULDIV_UNROLL),
+	.MUL_FAST            (MUL_FAST),
+	.MUL_FASTER          (MUL_FASTER),
+	.MULH_FAST           (MULH_FAST),
+	.FAST_BRANCHCMP      (FAST_BRANCHCMP),
+	.BRANCH_PREDICTOR    (BRANCH_PREDICTOR),
+	.MTVEC_WMASK         (MTVEC_WMASK)
+     )
+   u_hazard3_cpu_1port 
+  (
 	// Global signals
     .clk(clk),
     .clk_always_on(1),
@@ -40,20 +88,20 @@ module top  #(
     .unblock_in(),
     
     // AHB5 Master port
-    .haddr(),   //output reg  [W_ADDR-1:0]  haddr,
-    .hwrite(), //output reg                hwrite,
-    .htrans(),//output reg  [1:0]         htrans,
-    .hsize(),//output reg  [2:0]         hsize,
-    .hburst(),//output wire [2:0]         hburst,
-    .hprot(),//output reg  [3:0]         hprot,
-    .hmastlock(),//output wire               hmastlock,
-    .hmaster(),//output reg  [7:0]         hmaster,
-    .hexcl(),//output reg                hexcl,
-    .hready(1'b1),//input  wire               hready,
-    .hresp(1'b0),//input  wire               hresp,
-    .hexokay(1'b0), //input  wire               hexokay,
-    .hwdata(),//output wire [W_DATA-1:0]  hwdata,
-    .hrdata(32'h0),//input  wire [W_DATA-1:0]  hrdata,
+    .haddr           (),//output reg  [W_ADDR-1:0]  haddr,
+    .hwrite          (),//output reg                hwrite,
+    .htrans          (),//output reg  [1:0]         htrans,
+    .hsize           (),//output reg  [2:0]         hsize,
+    .hburst          (),//output wire [2:0]         hburst,
+    .hprot           (),//output reg  [3:0]         hprot,
+    .hmastlock       (),//output wire               hmastlock,
+    .hmaster         (),//output reg  [7:0]         hmaster,
+    .hexcl           (),//output reg                hexcl,
+    .hready          (1'b1),//input  wire               hready,
+    .hresp           (1'b0),//input  wire               hresp,
+    .hexokay         (1'b1), //input  wire               hexokay,
+    .hwdata          (),//output wire [W_DATA-1:0]  hwdata,
+    .hrdata          (32'h0),//input  wire [W_DATA-1:0]  hrdata,
     
     // Debugger run/halt control
     .dbg_req_halt( 1'b0  ), //input  wire               dbg_req_halt,
