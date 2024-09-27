@@ -73,7 +73,7 @@ module top  #(
   (
 	// Global signals
     .clk(clk),
-    .clk_always_on(1),
+    .clk_always_on(clk),
     .rst_n(rst),
 
 	`ifdef RISCV_FORMAL
