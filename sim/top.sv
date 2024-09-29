@@ -22,7 +22,8 @@ module top  #(
     $finish;
    end
 
-
+wire pwrup_req;
+wire unblock_out; 
  hazard3_cpu_1port 
    #(
 	// These must have the values given here for you to end up with a useful SoC:
@@ -35,7 +36,7 @@ module top  #(
 	.RESET_REGFILE   (0),
 	// Can be overridden from the defaults in hazard3_config.vh during
 	// instantiation of example_soc():
-	.EXTENSION_A         (EXTENSION_A),
+	.EXTENSION_A         (0),//(EXTENSION_A),
 	.EXTENSION_C         (EXTENSION_C),
 	.EXTENSION_M         (EXTENSION_M),
 	.EXTENSION_ZBA       (EXTENSION_ZBA),
@@ -72,20 +73,20 @@ module top  #(
    u_hazard3_cpu_1port 
   (
 	// Global signals
-    .clk(clk),
-    .clk_always_on(clk),
-    .rst_n(rst),
+    .clk            (clk),
+    .clk_always_on  (clk),
+    .rst_n          (rst),
 
 	`ifdef RISCV_FORMAL
 	`RVFI_OUTPUTS ,
 	`endif
 
     // Power control signals
-    .pwrup_req(),
-    .pwrup_ack(1'b1),
-    .clk_en(),
-    .unblock_out(),
-    .unblock_in(),
+    .pwrup_req       (pwrup_req),
+    .pwrup_ack       (pwrup_req),
+    .clk_en          (/* unused */),
+    .unblock_out     (unblock_out),
+    .unblock_in      (unblock_out),
     
     // AHB5 Master port
     .haddr           (),//output reg  [W_ADDR-1:0]  haddr,
@@ -105,7 +106,7 @@ module top  #(
     
     // Debugger run/halt control
     .dbg_req_halt( 1'b0  ), //input  wire               dbg_req_halt,
-    .dbg_req_halt_on_reset( rst  ), //input  wire               dbg_req_halt_on_reset,/
+    .dbg_req_halt_on_reset( 1'b0  ), //input  wire               dbg_req_halt_on_reset,/
     .dbg_req_resume( 1'b0 ),//input  wire               dbg_req_resume,
     .dbg_halted(), //output wire               dbg_halted,
     .dbg_running(  ), //output wire               dbg_running,
