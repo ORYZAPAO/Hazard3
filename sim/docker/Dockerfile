@@ -6,10 +6,12 @@ RUN mkdir -p -m 0700 ~/.ssh && \
     ssh-keyscan github.com >> ~/.ssh/known_hosts 
 
 WORKDIR /app
-RUN git clone https://github.com/riscv/riscv-gnu-toolchain.git
+COPY ./riscv /opt/riscv
 
-WORKDIR /app/riscv-gnu-toolchain 
-RUN ./configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d; \
-    make -j
 
+ENV RISCV=/opt/riscv
+
+ENV PATH=/opt/riscv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+WORKDIR /root
 
