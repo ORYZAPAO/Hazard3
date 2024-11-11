@@ -1,3 +1,41 @@
+// ---------- ---------- ---------- ---------- ----------
+//
+// ---------- ---------- ---------- ---------- ----------
+module ram #(
+`include "hazard3_config.vh"
+)  (
+	input  [W_ADDR-1:0] addr
+   ,output [W_DATA-1:0] rdata
+   
+  );
+
+reg [W_DATA-1:0] mem [16] = {
+  32'h0000_0000,
+  32'h0000_0001,
+  32'h0000_0002,
+  32'h0000_0003,
+  32'h0000_0004,
+  32'h0000_0005,
+  32'h0000_0006,
+  32'h0000_0007,
+  32'h0000_0008,
+  32'h0000_0009,
+  32'h0000_000a,
+  32'h0000_000b,
+  32'h0000_000c,
+  32'h0000_000d,
+  32'h0000_000e,
+  32'h0000_000f
+  };
+
+  assign rdata = mem[ addr[3:0] ];
+
+ endmodule
+
+
+// ---------- ---------- ---------- ---------- ----------
+//
+// ---------- ---------- ---------- ---------- ----------
 module top  #(
 `include "hazard3_config.vh"
 ) ();
@@ -23,7 +61,16 @@ module top  #(
    end
 
 wire pwrup_req;
-wire unblock_out; 
+wire unblock_out;
+
+wire [W_ADDR-1:0] w_addr;
+wire [W_DATA-1:0] w_rdata;
+
+ram u_ram(
+  .addr( w_addr >> 3)
+  ,.rdata( w_rdata )
+  );
+
  hazard3_cpu_1port 
    #(
 	// These must have the values given here for you to end up with a useful SoC:
@@ -89,7 +136,7 @@ wire unblock_out;
    .unblock_in                ( unblock_out),  // input  wire               unblock_in,
     
    // AHB5 Master port
-   .haddr                     (  ),//output reg  [W_ADDR-1:0]  haddr,
+   .haddr                     ( w_addr ),//output reg  [W_ADDR-1:0]  haddr,
    .hwrite                    (  ),//output reg                hwrite,
    .htrans                    (  ),//output reg  [1:0]         htrans,
    .hsize                     (  ),//output reg  [2:0]         hsize,
@@ -102,7 +149,7 @@ wire unblock_out;
    .hresp                     ( 1'b0 ),//input  wire               hresp,
    .hexokay                   ( 1'b1 ), //input  wire               hexokay,
    .hwdata                    (  ),//output wire [W_DATA-1:0]  hwdata,
-   .hrdata                    ( 32'h0 ),//input  wire [W_DATA-1:0]  hrdata,
+   .hrdata                    ( w_rdata ),//input  wire [W_DATA-1:0]  hrdata,
     
    // Debugger run/halt control
    .dbg_req_halt              ( 1'b0 ), //input  wire               dbg_req_halt,
@@ -138,3 +185,5 @@ wire unblock_out;
    );
    
 endmodule
+
+
